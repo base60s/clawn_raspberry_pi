@@ -1,0 +1,8 @@
+{
+  "steps": [
+    {"command": "pwd"},
+    {"command": "ls -la"},
+    {"write_file": {"path": "saferclaw_tmp.txt", "content": "created-by-saferclaw\n"}},
+    {"read_file": "saferclaw_tmp.txt"}
+  ]
+}

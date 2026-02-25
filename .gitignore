@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.saferclaw.audit.jsonl
+.saferclaw.jobs.sqlite
+build/
+dist/
+*.egg-info/
+
