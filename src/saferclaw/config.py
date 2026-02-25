@@ -27,7 +27,7 @@ DEFAULT_DENIED_COMMANDS = [
 class SafetyConfig:
     allowed_commands: set[str] = field(default_factory=lambda: set(DEFAULT_ALLOWED_COMMANDS))
     denied_commands: set[str] = field(default_factory=lambda: set(DEFAULT_DENIED_COMMANDS))
-    allowed_roots: list[str] = field(default_factory=lambda: [str(Path(".").resolve())]
+    allowed_roots: list[str] = field(default_factory=lambda: [str(Path(".").resolve())])
     require_confirmation: bool = True
     command_timeout_seconds: int = 10
     max_output_bytes: int = 12_000
