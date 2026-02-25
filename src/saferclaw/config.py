@@ -36,6 +36,12 @@ class SafetyConfig:
     allowed_env: dict[str, str] = field(
         default_factory=lambda: {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin"}
     )
+    state_db_path: str = ".saferclaw.jobs.sqlite"
+    llm_enabled: bool = False
+    llm_provider: str = "anthropic"
+    llm_model: str | None = None
+    llm_api_key_env: str | None = None
+    llm_max_turns: int = 1
 
     def dump(self) -> str:
         payload = asdict(self)
@@ -84,6 +90,15 @@ def _coerce_int(value: object, default: int) -> int:
     raise ValueError("Expected an integer")
 
 
+def _coerce_optional_str(value: object) -> str | None:
+    if value is None:
+        return None
+    if isinstance(value, str):
+        text = value.strip()
+        return text or None
+    return str(value)
+
+
 def load_config(path: str | None = None) -> SafetyConfig:
     if path is None:
         return SafetyConfig()
@@ -126,6 +141,12 @@ def load_config(path: str | None = None) -> SafetyConfig:
             if isinstance(raw.get("allowed_env"), dict)
             else SafetyConfig.allowed_env.copy()
         ),
+        state_db_path=str(raw.get("state_db_path") or SafetyConfig.state_db_path),
+        llm_enabled=_coerce_bool(raw.get("llm_enabled"), SafetyConfig.llm_enabled),
+        llm_provider=str(raw.get("llm_provider") or SafetyConfig.llm_provider),
+        llm_model=_coerce_optional_str(raw.get("llm_model")),
+        llm_api_key_env=_coerce_optional_str(raw.get("llm_api_key_env")),
+        llm_max_turns=_coerce_int(raw.get("llm_max_turns"), SafetyConfig.llm_max_turns),
     )
 
 

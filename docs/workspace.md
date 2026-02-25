@@ -1,6 +1,6 @@
 # Workspace `.md` Profiles
 
-SafeClaw can read markdown context files from a workspace directory.
+SafeClaw reads markdown context files from a workspace directory into LLM system prompts.
 
 Supported files:
 
@@ -17,7 +17,12 @@ Supported files:
 Behavior:
 
 - files are parsed as plain text unless frontmatter is supported.
-- content is merged into runtime context.
+- content is merged into `workspace_context`.
 - no dynamic code execution is performed.
 - malformed/missing files fall back to defaults.
 
+Use in CLI:
+
+```bash
+python -m saferclaw run-llm "Write a short status" --workspace examples/workspace
+```

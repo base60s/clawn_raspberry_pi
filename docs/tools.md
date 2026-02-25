@@ -2,7 +2,7 @@
 
 Tools are the only operations executor can perform.
 
-Planned core tools:
+Core tools:
 
 ## run_command
 
@@ -43,4 +43,3 @@ Behavior:
 Safety rule:
 
 - every tool call must pass the same policy checks as direct CLI calls.
-

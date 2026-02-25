@@ -1,11 +1,19 @@
 # LLM Integration Notes
 
-SafeClaw can be extended with an LLM adapter while keeping execution safe.
+SafeClaw can use a remote LLM while keeping execution safe.
 
 Key rule:
 
 - The LLM proposes action steps.
-- `policy.py`/executor validates and performs the action.
+- `executor` validates and performs all actions.
+
+Use:
+
+```bash
+python -m saferclaw run-llm "Check current disk usage and summarize it" \
+  --provider anthropic \
+  --workspace examples/workspace
+```
 
 Tool contract examples:
 
@@ -33,10 +41,19 @@ Tool contract examples:
 }
 ```
 
-## Required controls
+## Required controls in SafeClaw
 
 - schema validation before execution
-- no shell injection path
+- no shell=True / no command chaining
 - confirmation policy
 - audit logging of all tool calls and results
 
+CLI command:
+
+- `run-llm` (one turn)
+
+Config-backed defaults:
+- `llm_provider`
+- `llm_model`
+- `llm_api_key_env`
+- `llm_max_turns`

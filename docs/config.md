@@ -25,12 +25,10 @@ Optional queue/llm fields (if enabled):
 
 1. built-in defaults
 2. JSON config file
-3. `AGENTS.md` workspace overrides
-4. CLI flags
+3. CLI flags
 
 ## Environment variables
 
 Use environment variables for credentials:
 - `ANTHROPIC_API_KEY`
 - `OPENAI_API_KEY`
-
